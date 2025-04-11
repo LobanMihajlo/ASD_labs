@@ -85,4 +85,4 @@ print(bfs_order)
 print("\nDFS vertex order:")
 print(dfs_order)
 
-draw_graph(matrix_dir, bfs_paths)
+draw_graph(matrix_dir, dfs_paths)

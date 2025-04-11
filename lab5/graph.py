@@ -1,7 +1,6 @@
 import math
 import tkinter as tk
 import random
-import time
 
 n3 = 2
 n4 = 0
@@ -16,7 +15,6 @@ def calculate_element(k):
     return math.floor(random.random() * 2 * k)
 
 matrix_dir = [[0] * vertexes for _ in range(vertexes)]
-matrix_undir = [[0] * vertexes for _ in range(vertexes)]
 
 for i in range(vertexes):
     for j in range(vertexes):
@@ -47,6 +45,8 @@ def rotate_around_center(x, y, cx, cy, theta):
 
 def draw_graph(matrix, paths): 
     vertexes = len(matrix)
+    width_regular = 1
+    width_highlight = 3
     
     for i in range(vertexes):
         x = get_x(i) - R
@@ -80,9 +80,9 @@ def draw_graph(matrix, paths):
                     p3 = rotate_around_center(p3[0], p3[1], cx, cy, theta)
                     p4 = rotate_around_center(p4[0], p4[1], cx, cy, theta)
 
-                    canvas.create_line(p1[0], p1[1], p2[0], p2[1], width=2)
-                    canvas.create_line(p2[0], p2[1], p3[0], p3[1], width=2)
-                    canvas.create_line(p3[0], p3[1], p4[0], p4[1], width=2, arrow=tk.LAST)
+                    canvas.create_line(p1[0], p1[1], p2[0], p2[1], width=width_regular)
+                    canvas.create_line(p2[0], p2[1], p3[0], p3[1], width=width_regular)
+                    canvas.create_line(p3[0], p3[1], p4[0], p4[1], width=width_regular, arrow=tk.LAST)
                 else:
                     x1, y1 = get_x(i), get_y(i)
                     x2, y2 = get_x(j), get_y(j)
@@ -98,7 +98,7 @@ def draw_graph(matrix, paths):
                     x2 -= dx * R
                     y2 -= dy * R
 
-                    canvas.create_line(x1, y1, x2, y2, width=2, arrow=tk.LAST)
+                    canvas.create_line(x1, y1, x2, y2, width=width_regular, arrow=tk.LAST)
 
     visited_vertices = [False] * vertexes
 
@@ -121,7 +121,7 @@ def draw_graph(matrix, paths):
             x2 -= dx * R
             y2 -= dy * R
 
-            canvas.create_line(x1, y1, x2, y2, width=2.5, arrow=tk.LAST, fill="magenta")
+            canvas.create_line(x1, y1, x2, y2, width=width_highlight, arrow=tk.LAST, fill="magenta")
             canvas.update()
             canvas.after(1000, highlight_path, k + 1)
 
